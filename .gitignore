@@ -1,6 +1,6 @@
 data/
 log/
-models/
+pretrained/
 output/
 venvhpe/
 emissions.csv
