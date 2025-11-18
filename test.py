@@ -32,7 +32,7 @@ from lib.utils.utils import create_logger
 from codecarbon import track_emissions
 
 import lib.dataset as dataset
-import models
+import lib.models
 
 
 def parse_args():
