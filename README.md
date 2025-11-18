@@ -35,7 +35,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Dataset
-You can download the dataset at: [Dataset URL - Please update with actual URL]
+An older version of the dataset is available on [Zenodo](https://zenodo.org/records/3891404). You can contact the authors for access to the latest version used in this work, which has not yet been publicly released.
 
 ### 3. Pretrained Models
 You can download pretrained models from:
