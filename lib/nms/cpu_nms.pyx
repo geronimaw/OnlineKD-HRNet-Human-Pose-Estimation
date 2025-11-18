@@ -1,15 +1,12 @@
-# ------------------------------------------------------------------------------
-# Copyright (c) Microsoft
-# Licensed under the MIT License.
-# Written by Bin Xiao (Bin.Xiao@microsoft.com)
-# ------------------------------------------------------------------------------
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 import numpy as np
 cimport numpy as np
+
+np.import_array()   # required to init NumPy C-API
+
 
 cdef inline np.float32_t max(np.float32_t a, np.float32_t b):
     return a if a >= b else b
@@ -31,13 +28,9 @@ def cpu_nms(np.ndarray[np.float32_t, ndim=2] dets, np.float thresh):
     cdef np.ndarray[np.int_t, ndim=1] suppressed = \
             np.zeros((ndets), dtype=np.int)
 
-    # nominal indices
     cdef int _i, _j
-    # sorted indices
     cdef int i, j
-    # temp variables for box i's (the box currently under consideration)
     cdef np.float32_t ix1, iy1, ix2, iy2, iarea
-    # variables for computing overlap with box j (lower scoring box)
     cdef np.float32_t xx1, yy1, xx2, yy2
     cdef np.float32_t w, h
     cdef np.float32_t inter, ovr

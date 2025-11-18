@@ -24,15 +24,15 @@ import torchvision.transforms as transforms
 from tensorboardX import SummaryWriter
 
 import _init_paths
-from config import cfg
-from config import update_config
-from core.loss import JointsMSELoss, JointsKLDLoss
-from core.function import validate
-from utils.utils import create_logger
+from lib.config import cfg
+from lib.config import update_config
+from lib.core.loss import JointsMSELoss, JointsKLDLoss
+from lib.core.function import validate
+from lib.utils.utils import create_logger
 from codecarbon import track_emissions
 
-import dataset
-import models
+import lib.dataset
+import lib.models
 
 
 def parse_args():
@@ -103,26 +103,21 @@ def main():
         logger.info('=> loading model from {}'.format(cfg.TEST.MODEL_FILE))
         model.load_state_dict(torch.load(cfg.TEST.MODEL_FILE), strict=False)
     else:
-        # model_state_file = os.path.join(
-        #     final_output_dir, 'final_state.pth'
-        # )
         best_model = -1
         for file in os.listdir(final_output_dir):
-            if file == "model_best.pth":
-                best_model = file
-            # if "model_best" in file:
-            #     if best_model == -1:
-            #         best_model = file
-            #     else:
-            #         IndexError(f"Too many 'model_best' in dir {final_output_dir}")
+            if "model_best_epoch" in file:
+                # Get the last saved best model
+                epoch_num = file[len("model_best_epoch"):-len(".pth")]
+                if int(epoch_num) > best_model:
+                    best_model = int(epoch_num)
+        print("Best model: ", f"model_best_epoch{best_model}.pth", "\nfinal_output_dir: ", final_output_dir)
         model_state_file = os.path.join(
-            final_output_dir, best_model
+            final_output_dir, f"model_best_epoch{best_model}.pth"
             )
         logger.info('=> loading model from {}'.format(model_state_file))
         model.load_state_dict(torch.load(model_state_file))
 
     model = torch.nn.DataParallel(model, device_ids=cfg.GPUS).cuda()
-    print(model)
 
     # define loss function (criterion) and optimizer
     criterion = JointsMSELoss(
