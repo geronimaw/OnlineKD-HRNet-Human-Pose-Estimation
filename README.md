@@ -2,6 +2,20 @@
 
 This is the official repository of the ACM Health paper ["Online Knowledge Distillation and Deep Supervision for Preterm Infants' Pose Estimation: A Research Guided by the Principles of Green AI"](https://doi.org/10.1145/3757067).
 
+## Project Structure
+
+```
+.
+├── __init__.py
+├── data
+├── experiments
+├── lib
+├── pretrained
+├── test.py
+├── tools
+└── train.py
+```
+
 ## Setup and Installation
 
 ### 1. Environment Setup
@@ -22,6 +36,13 @@ pip install -r requirements.txt
 
 ### 2. Dataset
 You can download the dataset at: [Dataset URL - Please update with actual URL]
+
+### 3. Pretrained Models
+You can download pretrained models from:
+- **Google Drive**: https://drive.google.com/drive/folders/14p2l1u19bLOm5p6esKyolYJyfE1_inLv
+- **OneDrive**: https://1drv.ms/f/s!AhIXJn_J-blW231MH2krnmLq5kkQ
+
+*Note: These links are from the original HRNet repository. Place them in the `pretrained` directory.*
 
 ## Usage
 
@@ -46,9 +67,6 @@ To test the model, run the following command with the same configuration file us
 ```bash
 python test.py --cfg experiments/babypose/hrnet/DESIRED_CONFIG_FILE.yaml
 ```
-
-### Pretrained Models
-You can find pretrained models at: [Model URL - Please update with actual URL]
 
 ### Acknowledgments
 The research was carried out thank to the contribution from the "ITALIAN FUND FOR APPLIED SCIENCES" (FISA) grant n°FISA2022-00696
