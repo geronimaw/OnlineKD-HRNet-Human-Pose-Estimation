@@ -36,7 +36,7 @@ from lib.utils.utils import create_logger
 from lib.utils.utils import get_optimizer
 from lib.utils.utils import save_checkpoint
 
-import models
+import lib.models
 import logging
 from tools.data_load import get_loader
 
